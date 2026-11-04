@@ -19,13 +19,17 @@ ARG BASE_IMAGE
 
 # Bun runs omo's engine, so the image needs Bun rather than Node. The
 # `omo` launcher prefers Bun over Node when it is on PATH, and the package
-# targets Bun 1.4+. The installer needs unzip.
+# targets Bun 1.4+. The installer needs unzip. zsh is the agent's login
+# shell so interactive sessions and herdr panes behave the same everywhere.
 USER root
 RUN <<'EOF'
 set -euxo pipefail
 apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates curl unzip && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends ca-certificates curl unzip zsh && \
+    rm -rf /var/lib/apt/lists/* && \
+    chsh -s /usr/bin/zsh agent && \
+    groupadd -g 1002 deploy && \
+    useradd -u 1002 -g 1002 -M -d /home/agent -s /usr/bin/zsh deploy
 EOF
 
 USER agent
