@@ -44,8 +44,7 @@ WORKDIR /home/agent
 ARG TARGETARCH
 ARG OMO_VERSION=5.1.48
 RUN npm install -g "omo-ai@${OMO_VERSION}" \
-    && omo --version \
-    && npm cache clean --force
+    && omo --version
 
 USER root
 RUN ln -sf "$(npm prefix -g)/bin/omo" /usr/local/bin/omo
