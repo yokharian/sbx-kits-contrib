@@ -62,15 +62,14 @@ Widen the policy in the web UI under Policies if your workflow needs more.
 ## Base image
 
 `sbx/oh-my-openagent-image` is built on `docker.io/sbx/shell-image`: the standard
-sandbox tool chain (Node, npm, git, ripgrep, ...). On top of that it installs
-Node 24 and the `omo-ai` npm package into the
-agent-owned global prefix, then symlinks `omo` onto `/usr/local/bin`. It runs
-as the non-root `agent` user with `CMD ["omo"]`.
+sandbox tool chain (git, ripgrep, ...). On top of that it installs Bun under the
+agent's home and the `omo-ai` package into Bun's global prefix, then puts
+`~/.bun/bin` on `PATH`. It runs as the non-root `agent` user with `CMD ["omo"]`.
 
 Build args:
 
 - `BASE_IMAGE` -- re-point or digest-pin the base (`docker.io/sbx/shell-image:latest`).
-- `OMO_VERSION` -- pin a published `omo-ai` version (`5.1.48`, no leading `v`). Left empty, npm resolves `latest`.
+- `OMO_VERSION` -- pin a published `omo-ai` version (`5.1.48`, no leading `v`). Left empty, Bun resolves `latest`.
 
 ## Kit vs image
 

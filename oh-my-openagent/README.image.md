@@ -8,12 +8,12 @@ Base image for the oh-my-openagent kit for
 Built on `docker.io/sbx/shell-image`: the standard sandbox tool chain plus a
 non-root `agent` user. On top of that:
 
-- Node 24, installed from NodeSource
+- Bun, installed with the official installer under the agent's home
 - [`omo-ai`](https://www.npmjs.com/package/omo-ai),
-  installed globally via `npm install -g` into the agent-owned global prefix,
-  with `omo` symlinked onto `/usr/local/bin`
+  installed globally via `bun add -g` into Bun's global prefix, with
+  `~/.bun/bin` on `PATH`
 
-The `omo-ai` npm package installs the `omo` binary at build time.
+The `omo-ai` package installs the `omo` binary at build time.
 
 ## Installation
 
@@ -22,7 +22,7 @@ The image downloads `omo-ai` from the npm registry at build time. No compilation
 Build args:
 
 - `BASE_IMAGE` -- re-point or digest-pint the base.
-- `OMO_VERSION` -- optionally pin a published version (`5.1.48`, no leading `v`). Left empty, npm resolves `latest`.
+- `OMO_VERSION` -- optionally pin a published version (`5.1.48`, no leading `v`). Left empty, Bun resolves `latest`.
 
 Runs as the non-root `agent` user, with `CMD ["omo"]`.
 
