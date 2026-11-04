@@ -6,6 +6,10 @@ description: oh-my-openagent, the extension-first coding agent, with provider cr
 
 version: "1.0.0"
 
+# The workload's root filesystem is built from this file next to the
+# descriptor (v3).
+dockerfile: Dockerfile
+
 provides: ["omo-ai@5.1.48"]
 
 capabilities:
